@@ -13,6 +13,14 @@
 - Create SignUp User Account in Firebase
 - Implement Sign in user Api
 - Created redux store with user slice
+- Implemented sign out
+- update profile
+- BugFix: sign up user display name and profile picture update
+- BigFix: if the user is not logged in Redirect/browse to login page and vice-versa
+- unsubscribed to the onAuthStateChanged callback.
+- Add hardcoded values to the constant file.
+- Rgeister TMDB API & create an app and get access token
+- get data from TMDB now playing movies list API
 
 # Features
 

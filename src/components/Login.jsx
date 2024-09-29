@@ -4,10 +4,16 @@ import { checkValidateData } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+import { NETFLIX_BG_WALLPAPER, USER_LOGO } from "../utils/constants";
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -38,6 +44,29 @@ const Login = () => {
           const user = userCredential.user;
           console.log(user);
           //...
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: USER_LOGO
+          })
+            .then(() => {
+              // Profile updated!
+              // ...
+
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+              // navigate("/browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -57,12 +86,11 @@ const Login = () => {
           const user = userCredential.user;
           // ...
           console.log("loggein", user);
-          
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setErrorMessage(errorCode+" - "+ errorMessage)
+          setErrorMessage(errorCode + " - " + errorMessage);
         });
     }
   };
@@ -76,7 +104,7 @@ const Login = () => {
       <Header />
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/47c2bc92-5a2a-4f33-8f91-4314e9e62ef1/web/IN-en-20240916-TRIFECTA-perspective_72df5d07-cf3f-4530-9afd-8f1d92d7f1a8_large.jpg"
+          src={NETFLIX_BG_WALLPAPER}
           alt="bg-logo"
         />
       </div>
