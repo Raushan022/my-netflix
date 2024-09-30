@@ -21,6 +21,9 @@
 - Add hardcoded values to the constant file.
 - Rgeister TMDB API & create an app and get access token
 - get data from TMDB now playing movies list API
+- custom gook for now playing movies
+- created movie slice
+- updated store with movies data
 
 # Features
 

@@ -35,27 +35,24 @@ const Header = () => {
         );
         navigate("/browse");
       } else {
-        // User is signed out
         dispatch(removeUser());
         navigate("/");
       }
     });
 
-    // Unsubscribe when component unmounts
+    // Unsiubscribe when component unmounts
     return () => unsubscribe();
   }, []);
 
   return (
     <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
-      <img
-        className="w-44"
-        src={NETFLIX_LOGO}
-        alt="netflix-logo"
-      />
+      <img className="w-44" src={NETFLIX_LOGO} alt="netflix-logo" />
       {user && (
         <div className="flex p-2">
           <img className="w-12 h-12" src={user?.photoURL} alt="user-icon" />
-          <button onClick={handleSignOut}>Sign Out</button>
+          <button
+          className="text-white"
+           onClick={handleSignOut}>Sign Out</button>
         </div>
       )}
     </div>
